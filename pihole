@@ -1,0 +1,72 @@
+# Pi-hole setup
+
+# Run automated installer
+curl -sSL https://install.pi-hole.net | bash
+
+# Configure router to have DHCP clients use Pi-hole as the DNS server
+# Set static IP address
+
+# Install log
+/etc/pihole
+
+# View the web interface
+http://pi.hole/admin 
+
+# Pihole commmand line
+https://docs.pi-hole.net/core/pihole-command/
+
+# Change password
+pihole -a -p
+
+# Chronometer
+pihole -c -e
+
+
+
+# Troubleshooting after unexpected loss of power
+fsck
+pihole -r
+pihole reconfigure
+
+
+
+# Pi-hole Under-voltage warnings script
+
+# Requires Python
+python3 --version
+sudo apt-get install python3-pip -y
+
+# Install RPi.GPIO
+sudo apt update
+sudo apt upgrade
+sudo apt install python3-rpi.gpio
+
+# piPower - shows LED status in the console (over SSH) 
+https://github.com/electronicsguy/piPower
+consoleLED.py
+
+
+
+# Pi-hole-Influx
+
+# A simple daemonized script to report Pi-Hole stats to InfluxDB
+https://github.com/janw/pi-hole-influx
+
+# Modify settings for https 
+
+# default.toml
+influxdb_ssl = "True"
+influxdb_verify_ssl = "False"
+
+# Fill out user.toml
+ 
+# Symlink the systemd service into place, reload, and enable
+sudo ln -s ~/pi-hole-influx/piholeinflux.service /etc/systemd/system/
+sudo systemctl --system daemon-reload
+sudo systemctl enable piholeinflux.service
+sudo systemctl start piholeinflux.service
+sudo systemctl status piholeinflux.service
+
+# Troubleshooting after start errors
+sudo systemctl status piholeinflux.service
+journalctl -xe
