@@ -1,10 +1,10 @@
-# raspi-pihole
+# raspi-hole-nginx
 
 
 
 
 
-Raspberry Pi 2 model B running Pi-Hole w/ a Python daemon sending statistics to InfluxDB for Grafana monitoring
+Raspberry Pi 2 model B running Pi-Hole with Nginx as the webserver, plus a Python daemon sending pi-hole statistics to an InfluxDB database hosted on Amazon aws for Grafana monitoring
 
 
 
@@ -22,13 +22,13 @@ Raspberry Pi 2 model B running Pi-Hole w/ a Python daemon sending statistics to 
 The following dependencies are required:
 
 * Pi-hole
-* InfluxDB
+* Nginx
 * Python3 and `pip`
 * `git`
 * [RPi.GPIO](https://pypi.org/project/RPi.GPIO/) 
 * [Pi-Hole-Influx](https://github.com/janw/pi-hole-influx)
 
-This setup sends pi-hole data to an InfluxDB instance hosted on an Amazon aws ec2 instance with HTTPS authentication enabled. Refer to the [tig-stack-aws](https://github.com/jihomc/tig-stack-aws) repository for setup instructions.
+This setup sends pi-hole data to an InfluxDB instance hosted on an Amazon aws ec2 instance with HTTPS authentication enabled. Refer to the [aws-tig-nginx](https://github.com/jihomc/aws-tig-nginx) repository for setup instructions.
 
 
 
@@ -389,12 +389,12 @@ systemctl start nginx
 
 
 
-### Nginx - aws instance 
+#### Nginx - aws instance 
 
 
 
 Nginx on aws will act as a reverse proxy sitting in front of the raspi webserver. Requests to pi.mydomain.com will be sent to the pi-hole admin console hosted on the raspi webserver.
 
-See the [aws instance nginx.conf](https://github.com/jihomc/raspi-hole-nginx/blob/master/nginx/nginx.conf)
+See the [aws instance nginx.conf](https://github.com/jihomc/raspi-hole-nginx/blob/master/aws/nginx.conf)
 
  
