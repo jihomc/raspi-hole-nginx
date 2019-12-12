@@ -1,0 +1,82 @@
+# Install Nginx
+
+# Download packages
+https://nginx.org/en/linux_packages.html
+sudo apt install curl gnupg2 ca-certificates lsb-release
+
+# Set up the apt repository for stable packages
+echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+      | sudo tee /etc/apt/sources.list.d/nginx.list
+
+# Import official nginx signing key for verifcation of packages
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+sudo apt-key fingerprint ABF5BD827BD9BF62
+
+# The output should contain the full fingerprint 573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62
+
+sudo apt update
+sudo apt install nginx
+
+# Configuration File
+sudo vim /etc/nginx/nginx.conf
+
+# Starting, stopping, reloading nginx
+sudo systemctl [ start | restart | status ] nginx
+
+
+# Use Nginx instead of Lighttpd as the webserver
+# Documentation at https://docs.pi-hole.net/guides/nginx-configuration/
+
+Basic requirements
+
+1. Stop default lighttpd
+service lighttpd stop
+
+2. Install necessary packages
+apt-get -y install nginx php7.0-fpm php7.0-zip apache2-utils
+
+# Encountered issues installing php7.0 with the above command, solution below
+
+sudo apt-add-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.0
+
+3. Disable lighttpd at startup
+systemctl disable lighttpd
+
+4. Enable php7.0-fpm at startup
+# Encountered issues with php7.0-fpm as well, solution below
+
+sudo apt-cache search php7.0- |more
+sudo apt-get install php7.0-fpm
+systemctl enable php7.0-fpm
+
+5. Enable nginx at startup
+systemctl enable nginx
+
+6. Edit /etc/nginx/nginx.conf to on the raspi to use nginx as the pi-hole webserver
+
+
+##### Additional configuration
+
+# raspi - add domain to setupVars.conf
+
+/etc/pihole/setupVars.conf
+IPV4_ADDRESS=www.pi.mydomain.com
+
+# Change ownership of html director to nginx user
+chown -R www-data:www-data /var/www/html
+
+
+# Make sure html directory is writable
+chmod -R 755 /var/www/html
+
+# Start php7.0-fpm daemon
+systemctl start php7.0-fpm
+
+# Start nginx webserver
+systemctl start nginx
+
+
+
+
