@@ -1,0 +1,17 @@
+[global]
+
+# All options should be wrapped in quotes
+
+# Host - aws ec2 ip address where InfluxDB is installed 
+influxdb_host = "aws-ip-address"
+influxdb_port = "8086"
+influxdb_database = "raspi"
+influxdb_username = "username"
+influxdb_password = "password"
+
+request_timeout = "10"
+reporting_interval = "30"
+
+instances="localhost=http://127.0.0.1/admin/api.php"
+# instances={pihole="http://10.10.0.10/admin/api.php", second instance="http://192.168.0.1/admin/api.php"}
+# instances=["http://10.10.0.10/admin/api.php", "http://192.168.0.1/admin/api.php"]

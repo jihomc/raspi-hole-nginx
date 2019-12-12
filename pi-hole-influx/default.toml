@@ -1,0 +1,17 @@
+[default]
+log_level = "info"
+
+influxdb_host = "127.0.0.1"
+influxdb_port = "8086"
+influxdb_database = "pihole"
+influxdb_ssl = "True"
+influxdb_verify_ssl = "False"
+
+request_timeout = 10
+reporting_interval = 30
+
+instances="localhost=http://127.0.0.1/admin/api.php"
+
+[development]
+
+[production]
