@@ -7,9 +7,10 @@ Raspberry Pi 2 model B running Pi-Hole with Nginx as the webserver, plus a Pytho
 
 
 
-#### Cloud-hosted Nginx reverse-proxy in front of my local pi-hole admin console
+#### Cloud-hosted Nginx reverse-proxy serving my local pi-hole admin console
 
 
+ctrl+click to open in new tab
 #### [pi.mclegg.net](https://pi.mclegg.net)
 
 
