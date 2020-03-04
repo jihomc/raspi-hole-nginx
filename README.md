@@ -3,8 +3,14 @@
 
 
 
-
 Raspberry Pi 2 model B running Pi-Hole with Nginx as the webserver, plus a Python daemon sending pi-hole statistics to an InfluxDB database hosted on Amazon aws for Grafana monitoring
+
+
+
+#### Cloud-hosted Nginx reverse-proxy in front of my local pi-hole admin console
+
+
+#### [pi.mclegg.net](https://pi.mclegg.net)
 
 
 
